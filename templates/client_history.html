@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 style="color: #1976D2; font-weight: 600; letter-spacing: 1px; margin-bottom: 30px;">Histórico de Consultas</h1>
+    {% if appointments %}
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Cliente</th>
+                        <th>E-mail</th>
+                        <th>CPF</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                        <tr>
+                            <td>{{ appointment[0] }}</td>
+                            <td>{{ appointment[1] }}</td>
+                            <td>{{ appointment[2] }}</td>
+                            <td>{{ appointment[3] }}</td>
+                            <td>{{ appointment[4] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p style="color: #1976D2;">Nenhuma consulta encontrada.</p>
+    {% endif %}
+    <a href="{{ url_for('client_dashboard') }}" class="btn btn-primary mt-4" style="background-color: #BBDEFB; color: #1976D2; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 500;">Voltar ao Dashboard</a>
+</div>
+{% endblock %}

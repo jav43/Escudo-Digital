@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 style="color: #1976D2; font-weight: 600; letter-spacing: 1px; margin-bottom: 30px;">Log de Acessos</h1>
+    {% if logs %}
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo de Usuário</th>
+                        <th>ID do Usuário</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Ação</th>
+                        <th>Data e Hora</th>
+                        <th>Endereço IP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                        <tr>
+                            <td>{{ log[1] }}</td> <!-- user_type -->
+                            <td>{{ log[2] }}</td> <!-- user_id -->
+                            <td>{{ log[3] }}</td> <!-- user_name -->
+                            <td>{{ log[4] }}</td> <!-- email -->
+                            <td>{{ log[5] }}</td> <!-- action -->
+                            <td>{{ log[6] }}</td> <!-- timestamp -->
+                            <td>{{ log[7] }}</td> <!-- ip_address -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p style="color: #1976D2;">Nenhum log de acesso encontrado.</p>
+    {% endif %}
+    <a href="{{ url_for('doctor_dashboard') }}" class="btn btn-primary mt-4" style="background-color: #BBDEFB; color: #1976D2; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 500;">Voltar ao Dashboard</a>
+</div>
+{% endblock %}

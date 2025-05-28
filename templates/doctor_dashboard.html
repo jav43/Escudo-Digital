@@ -1,0 +1,7 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% extends 'base.html' %}
+{% block content %}
+<h2>Painel do Médico</h2>
+<a href="{{ url_for('doctor_daily') }}" class="btn btn-primary">Ver Consultas de Hoje</a>
+<a href="{{ url_for('doctor_failed_logins') }}" class="btn btn-secondary">Ver Tentativas de Login Malsucedidas</a>
+{% endblock %}

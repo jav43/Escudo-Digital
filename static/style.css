@@ -1,0 +1,200 @@
+/* Menu de Acessibilidade */
+.acessibilidade-menu {
+    position: fixed;
+    right: 20px;
+    top: 100px; /* Mantém a posição ajustada */
+    z-index: 1000;
+}
+
+#acessibilidade-btn {
+    background-color: #000000; /* Preto */
+    color: #1976D2; /* Azul médio */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+#acessibilidade-btn:hover {
+    background-color: #1C2526; /* Preto mais claro no hover */
+}
+
+.acessibilidade-options {
+    display: none; /* Inicialmente escondido */
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #000000; /* Preto */
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.acessibilidade-options.active {
+    display: block; /* Mostra quando ativo */
+}
+
+#alto-contraste-btn,
+#aumentar-fonte-btn,
+#diminuir-fonte-btn {
+    background-color: #BBDEFB; /* Azul claro */
+    color: #1976D2; /* Azul médio */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+#alto-contraste-btn:hover,
+#aumentar-fonte-btn:hover,
+#diminuir-fonte-btn:hover {
+    background-color: #90CAF9; /* Azul claro mais escuro no hover */
+}
+
+/* Modo Alto Contraste - PRETO E AZUL */
+body.modo-alto-contraste {
+    background-color: #000000 !important; /* Preto */
+    color: #1976D2 !important; /* Azul médio */
+}
+
+body.modo-alto-contraste .navbar,
+body.modo-alto-contraste footer,
+body.modo-alto-contraste .alert {
+    background-color: #000000 !important; /* Preto */
+    color: #1976D2 !important; /* Azul médio */
+}
+
+body.modo-alto-contraste a,
+body.modo-alto-contraste .nav-link {
+    color: #1976D2 !important; /* Azul médio para destaque nos links */
+}
+
+body.modo-alto-contraste button,
+body.modo-alto-contraste .btn {
+    background-color: #BBDEFB !important; /* Azul claro */
+    color: #1976D2 !important; /* Azul médio */
+    border: 2px solid #BBDEFB !important; /* Borda azul claro */
+}
+
+body.modo-alto-contraste #acessibilidade-btn,
+body.modo-alto-contraste #alto-contraste-btn,
+body.modo-alto-contraste #aumentar-fonte-btn,
+body.modo-alto-contraste #diminuir-fonte-btn {
+    background-color: #BBDEFB !important; /* Azul claro */
+    color: #1976D2 !important; /* Azul médio */
+}
+
+body.modo-alto-contraste .acessibilidade-options {
+    background-color: #000000 !important; /* Preto */
+}
+
+/* Estilo para tabelas */
+.table-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #121212; /* Preto mais suave para o contêiner */
+    border-radius: 12px; /* Bordas arredondadas */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra sofisticada */
+    overflow-x: auto; /* Para tabelas responsivas */
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: #000000; /* Preto */
+    color: #1976D2; /* Azul médio */
+    border-radius: 8px; /* Bordas arredondadas na tabela */
+    overflow: hidden; /* Para bordas arredondadas funcionarem */
+}
+
+th, td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #BBDEFB; /* Azul claro */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+th {
+    background-color: #BBDEFB; /* Azul claro */
+    color: #1976D2; /* Azul médio */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+td {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+tr:last-child td {
+    border-bottom: none; /* Remove a borda da última linha */
+}
+
+tr {
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Animação suave */
+}
+
+tr:hover {
+    background-color: #1C2526; /* Preto mais claro no hover */
+    transform: scale(1.01); /* Leve aumento no hover */
+}
+
+tr:nth-child(even) {
+    background-color: #0A0A0A; /* Preto um pouco mais claro para contraste */
+}
+
+/* Modo Alto Contraste */
+body.modo-alto-contraste .table-container {
+    background-color: #121212 !important;
+}
+
+body.modo-alto-contraste table {
+    background-color: #000000 !important; /* Preto */
+    color: #1976D2 !important; /* Azul médio */
+}
+
+body.modo-alto-contraste th {
+    background-color: #BBDEFB !important; /* Azul claro */
+    color: #1976D2 !important;
+}
+
+body.modo-alto-contraste td {
+    border-bottom: 1px solid #BBDEFB !important; /* Azul claro */
+}
+
+body.modo-alto-contraste tr:nth-child(even) {
+    background-color: #0A0A0A !important;
+}
+
+body.modo-alto-contraste tr:hover {
+    background-color: #1C2526 !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    th, td {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .table-container {
+        padding: 10px;
+    }
+}
