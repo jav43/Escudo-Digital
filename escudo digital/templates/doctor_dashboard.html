@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Painel do Médico</h2>
+    <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Agenda Diária</h5>
+                    <p class="card-text">Visualize e gerencie as consultas do dia.</p>
+                    <a href="{{ url_for('doctor_daily') }}" class="btn btn-primary">Ver Agenda</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Logs de Segurança</h5>
+                    <p class="card-text">Monitore tentativas de acesso e atividades suspeitas.</p>
+                    <a href="{{ url_for('security_logs') }}" class="btn btn-warning">Ver Logs</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Sair</h5>
+                    <p class="card-text">Encerrar a sessão atual.</p>
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

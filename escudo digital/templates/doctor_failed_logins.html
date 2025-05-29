@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% extends 'base.html' %}
+{% block content %}
+<h2>Tentativas de Login Mal sucedidas</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Usuário/E-mail</th>
+            <th>Data e Hora</th>
+            <th>Endereço IP</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for login in failed_logins %}
+        <tr>
+            <td>{{ login[0] }}</td>
+            <td>{{ login[1] }}</td>
+            <td>{{ login[2] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
