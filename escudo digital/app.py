@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, DateField, SelectField
 from wtforms.validators import DataRequired, Email, Length, ValidationError
@@ -279,13 +279,13 @@ def doctor_daily():
     with sqlite3.connect('database.db') as conn:
         c = conn.cursor()
         if start_date and end_date:
-            c.execute('''SELECT a.date, a.time, c.name, c.email, c.cpf
+            c.execute('''SELECT a.id, a.date, a.time, c.name, c.email, c.cpf
                          FROM appointments a
                          JOIN clients c ON a.client_id = c.id
                          WHERE a.date BETWEEN ? AND ? AND a.status = 'Agendado'
                          ORDER BY a.date, a.time''', (start_date, end_date))
         else:
-            c.execute('''SELECT a.date, a.time, c.name, c.email, c.cpf
+            c.execute('''SELECT a.id, a.date, a.time, c.name, c.email, c.cpf
                          FROM appointments a
                          JOIN clients c ON a.client_id = c.id
                          WHERE a.status = 'Agendado'
@@ -295,11 +295,55 @@ def doctor_daily():
     # Formatar a data para DD/MM/YYYY
     appointments = []
     for appt in appointments_raw:
-        date_str = appt[0]
+        date_str = appt[1]
         formatted_date = datetime.strptime(date_str, '%Y-%m-%d').strftime('%d/%m/%Y')
-        appointments.append((formatted_date, appt[1], appt[2], appt[3], appt[4]))
+        appointments.append((appt[0], formatted_date, appt[2], appt[3], appt[4], appt[5]))
 
     return render_template('doctor_daily.html', form=form, appointments=appointments, start_date=start_date, end_date=end_date)
+
+@app.route('/doctor/appointment/edit/<int:appointment_id>', methods=['POST'])
+def edit_appointment(appointment_id):
+    if 'doctor_id' not in session:
+        return redirect(url_for('doctor_login'))
+    
+    new_date = request.form.get('date')
+    new_time = request.form.get('time')
+    
+    try:
+        with sqlite3.connect('database.db') as conn:
+            c = conn.cursor()
+            # Verificar se o novo horário está disponível
+            c.execute("SELECT id FROM appointments WHERE date = ? AND time = ? AND id != ?", 
+                     (new_date, new_time, appointment_id))
+            if c.fetchone():
+                return jsonify({'success': False, 'message': 'Horário já está ocupado'})
+            
+            # Atualizar o agendamento
+            c.execute("""
+                UPDATE appointments 
+                SET date = ?, time = ? 
+                WHERE id = ?
+            """, (new_date, new_time, appointment_id))
+            conn.commit()
+            return jsonify({'success': True, 'message': 'Agendamento atualizado com sucesso'})
+    except sqlite3.Error as e:
+        return jsonify({'success': False, 'message': f'Erro ao atualizar: {str(e)}'})
+
+@app.route('/doctor/appointment/delete/<int:appointment_id>', methods=['POST'])
+def delete_appointment(appointment_id):
+    if 'doctor_id' not in session:
+        return redirect(url_for('doctor_login'))
+    
+    try:
+        with sqlite3.connect('database.db') as conn:
+            c = conn.cursor()
+            c.execute("DELETE FROM appointments WHERE id = ?", (appointment_id,))
+            conn.commit()
+            flash('Agendamento excluído com sucesso', 'success')
+    except sqlite3.Error as e:
+        flash(f'Erro ao excluir agendamento: {str(e)}', 'danger')
+    
+    return redirect(url_for('doctor_daily'))
 
 @app.route('/doctor/failed_logins')
 def doctor_failed_logins():

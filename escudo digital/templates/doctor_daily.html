@@ -36,16 +36,27 @@
                     <th>Cliente</th>
                     <th>E-mail</th>
                     <th>CPF</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 {% for appointment in appointments %}
                     <tr>
-                        <td>{{ appointment[0] }}</td> <!-- Data formatada: DD/MM/YYYY -->
-                        <td>{{ appointment[1] }}</td>
+                        <td>{{ appointment[1] }}</td> <!-- Data formatada: DD/MM/YYYY -->
                         <td>{{ appointment[2] }}</td>
                         <td>{{ appointment[3] }}</td>
-                        <td>{{ appointment[4] if appointment[4] else '-' }}</td>
+                        <td>{{ appointment[4] }}</td>
+                        <td>{{ appointment[5] if appointment[5] else '-' }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" onclick="openEditModal('{{ appointment[0] }}', '{{ appointment[1] }}', '{{ appointment[2] }}')">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <form action="{{ url_for('delete_appointment', appointment_id=appointment[0]) }}" method="POST" style="display: inline;">
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir este agendamento?')">
+                                    <i class="fas fa-trash"></i> Excluir
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -54,4 +65,83 @@
         <p>Nenhuma consulta agendada encontrada para o intervalo selecionado.</p>
     {% endif %}
 </div>
+
+<!-- Modal de Edição -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Editar Agendamento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <input type="hidden" id="appointmentId" name="appointment_id">
+                    <div class="mb-3">
+                        <label for="editDate" class="form-label">Data</label>
+                        <input type="date" class="form-control" id="editDate" name="date" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTime" class="form-label">Horário</label>
+                        <select class="form-control" id="editTime" name="time" required>
+                            <option value="08:00">08:00</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveEdit()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function openEditModal(id, date, time) {
+    document.getElementById('appointmentId').value = id;
+    
+    // Converter a data de DD/MM/YYYY para YYYY-MM-DD
+    const [day, month, year] = date.split('/');
+    const formattedDate = `${year}-${month}-${day}`;
+    
+    document.getElementById('editDate').value = formattedDate;
+    document.getElementById('editTime').value = time;
+    
+    new bootstrap.Modal(document.getElementById('editModal')).show();
+}
+
+function saveEdit() {
+    const form = document.getElementById('editForm');
+    const formData = new FormData(form);
+    const id = formData.get('appointment_id');
+    
+    fetch(`/doctor/appointment/edit/${id}`, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        alert('Erro ao atualizar o agendamento');
+        console.error('Error:', error);
+    });
+}
+</script>
 {% endblock %}
