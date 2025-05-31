@@ -1,51 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="text-center py-5">
-    <h1>Cadastro de Cliente</h1>
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <div class="mb-3">
-            {{ form.name.label(class="form-label") }}
-            {{ form.name(class="form-control") }}
-            {% for error in form.name.errors %}
-                <span class="text-danger">{{ error }}</span>
-            {% endfor %}
-        </div>
-        <div class="mb-3">
-            {{ form.email.label(class="form-label") }}
-            {{ form.email(class="form-control") }}
-            {% for error in form.email.errors %}
-                <span class="text-danger">{{ error }}</span>
-            {% endfor %}
-        </div>
-        <div class="mb-3">
-            {{ form.password.label(class="form-label") }}
-            {{ form.password(class="form-control") }}
-            {% for error in form.password.errors %}
-                <span class="text-danger">{{ error }}</span>
-            {% endfor %}
-        </div>
-        <div class="mb-3">
-            {{ form.phone.label(class="form-label") }}
-            {{ form.phone(class="form-control") }}
-            {% for error in form.phone.errors %}
-                <span class="text-danger">{{ error }}</span>
-            {% endfor %}
-        </div>
-        <div class="mb-3">
-            {{ form.cpf.label(class="form-label") }}
-            {{ form.cpf(class="form-control") }}
-            {% for error in form.cpf.errors %}
-                <span class="text-danger">{{ error }}</span>
-            {% endfor %}
-        </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-    </form>
-    <p class="mt-3"><a href="{{ url_for('client_login') }}">Já tem uma conta? Faça login aqui</a></p>
-</div>
-{% endblock %}
-{% extends 'base.html' %}
-{% block content %}
 <div class="container mt-5">
     <h1 style="color: #1976D2;">Registrar-se</h1>
     {% with messages = get_flashed_messages() %}
@@ -55,18 +9,40 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <form action="/client/register" method="POST">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
         <div class="mb-3">
-            <input type="text" name="name" class="form-control" placeholder="Nome" required>
+            {{ form.name(class="form-control", placeholder="Nome") }}
+            {% for error in form.name.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
         </div>
         <div class="mb-3">
-            <input type="email" name="email" class="form-control" placeholder="E-mail" required>
+            {{ form.email(class="form-control", placeholder="E-mail") }}
+            {% for error in form.email.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
         </div>
         <div class="mb-3">
-            <input type="password" name="password" class="form-control" placeholder="Senha" required>
+            {{ form.password(class="form-control", placeholder="Senha") }}
+            {% for error in form.password.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
         </div>
-        <button type="submit" class="btn btn-primary" style="background-color: #BBDEFB; color: #1976D2; border: none;">Registrar</button>
+        <div class="mb-3">
+            {{ form.phone(class="form-control", placeholder="Telefone") }}
+            {% for error in form.phone.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.cpf(class="form-control", placeholder="CPF") }}
+            {% for error in form.cpf.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        {{ form.submit(class="btn btn-primary", style="background-color: #BBDEFB; color: #1976D2; border: none;") }}
     </form>
-    <a href="/client/login" class="mt-3 d-block" style="color: #1976D2;">Já tem conta? Faça login</a>
+    <a href="{{ url_for('client_login') }}" class="mt-3 d-block" style="color: #1976D2;">Já tem conta? Faça login</a>
 </div>
 {% endblock %}

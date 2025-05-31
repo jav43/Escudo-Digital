@@ -2,32 +2,32 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Painel do Médico</h2>
-    <div class="row mt-4">
-        <div class="col-md-4 mb-3">
-            <div class="card">
+    <div class="alert alert-success">
+        <h4>Login bem-sucedido!</h4>
+        <p>Bem-vindo ao seu painel de controle.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Agenda Diária</h5>
-                    <p class="card-text">Visualize e gerencie as consultas do dia.</p>
-                    <a href="{{ url_for('doctor_daily') }}" class="btn btn-primary">Ver Agenda</a>
+                    <h5 class="card-title">Agenda do Dia</h5>
+                    <p class="card-text">Ver e gerenciar consultas</p>
+                    <a href="{{ url_for('doctor_daily') }}" class="btn btn-primary">
+                        <i class="fas fa-calendar-alt"></i> Ver Agenda
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-3">
-            <div class="card">
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Logs de Segurança</h5>
-                    <p class="card-text">Monitore tentativas de acesso e atividades suspeitas.</p>
-                    <a href="{{ url_for('security_logs') }}" class="btn btn-warning">Ver Logs</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Sair</h5>
-                    <p class="card-text">Encerrar a sessão atual.</p>
-                    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                    <h5 class="card-title">Histórico de Pacientes</h5>
+                    <p class="card-text">Consultar histórico de atendimentos</p>
+                    <a href="{{ url_for('doctor_patient_history') }}" class="btn btn-primary">
+                        <i class="fas fa-history"></i> Ver Histórico
+                    </a>
                 </div>
             </div>
         </div>

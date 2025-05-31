@@ -1,0 +1,171 @@
+:root {
+    --primary-color: #28a745;
+    --primary-dark: #218838;
+    --primary-light: #34ce57;
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --dark-gray: #343a40;
+}
+
+/* Alto Contraste */
+[data-theme="high-contrast"] {
+    --primary-color: #00ff00;
+    --primary-dark: #008000;
+    --primary-light: #00ff00;
+    --white: #000000;
+    --light-gray: #000000;
+    --dark-gray: #ffffff;
+}
+
+body {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+}
+
+.navbar {
+    background-color: var(--primary-color) !important;
+}
+
+.navbar-brand, .nav-link {
+    color: var(--white) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-dark);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.card {
+    border-color: var(--primary-color);
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Área inicial */
+.welcome-section {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.welcome-section h1 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.welcome-section p {
+    color: var(--dark-gray);
+    font-size: 1.2rem;
+}
+
+/* Cards da página inicial */
+.area-card {
+    background-color: var(--white);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.area-card:hover {
+    transform: translateY(-5px);
+}
+
+.area-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.area-card p {
+    color: var(--dark-gray);
+    margin-bottom: 1.5rem;
+}
+
+.area-card .btn {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.area-card .btn:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Formulários */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.form-label {
+    color: var(--dark-gray);
+}
+
+/* Tabelas */
+.table {
+    background-color: var(--white);
+}
+
+.table thead th {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Badges e status */
+.badge {
+    padding: 0.5em 1em;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+/* Botão de alto contraste */
+.contrast-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .area-card {
+        margin-bottom: 1rem;
+    }
+    
+    .welcome-section {
+        padding: 2rem 0;
+    }
+}
+
+/* Logo e título */
+.escudo-logo {
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.escudo-logo:hover {
+    color: var(--primary-dark);
+    text-decoration: none;
+} 

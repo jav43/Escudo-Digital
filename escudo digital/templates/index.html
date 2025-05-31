@@ -1,11 +1,61 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">{% extends 'base.html' %}
 {% block content %}
-<div class="text-center mt-5">
-    <h1 class="mb-3">Bem-vindo ao Escudo Digital</h1>
-    <p class="lead mb-4">Serviços de saúde seguros para a Clínica Vida Mais</p>
-    <div class="d-flex justify-content-center gap-3">
-        <a href="{{ url_for('client_login') }}" class="btn btn-primary btn-lg">Portal do Cliente</a>
-        <a href="{{ url_for('doctor_login') }}" class="btn btn-secondary btn-lg">Portal do Médico</a>
+<div class="welcome-section">
+    <h1>Bem-vindo ao Escudo Digital</h1>
+    <p>Sistema de agendamento de consultas médicas</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="area-card">
+            <h3>Área do Paciente</h3>
+            <p>Agende suas consultas e gerencie seus horários</p>
+            <a href="{{ url_for('client_login') }}" class="btn">Entrar</a>
+            <a href="{{ url_for('client_register') }}" class="btn">Cadastrar</a>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="area-card">
+            <h3>Área do Médico</h3>
+            <p>Gerencie sua agenda e pacientes</p>
+            <a href="{{ url_for('doctor_login') }}" class="btn">Entrar</a>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="area-card">
+            <h3>Administração</h3>
+            <p>Gerencie médicos e agendamentos</p>
+            <a href="{{ url_for('secretary_login') }}" class="btn">Entrar</a>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5 text-center">
+    <h2 class="mb-4">Por que escolher o Escudo Digital?</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="feature-card">
+                <i class="fas fa-clock fa-3x mb-3" style="color: var(--primary-color)"></i>
+                <h4>Agendamento Fácil</h4>
+                <p>Marque suas consultas de forma rápida e simples</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card">
+                <i class="fas fa-user-md fa-3x mb-3" style="color: var(--primary-color)"></i>
+                <h4>Médicos Qualificados</h4>
+                <p>Encontre os melhores profissionais da área</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card">
+                <i class="fas fa-shield-alt fa-3x mb-3" style="color: var(--primary-color)"></i>
+                <h4>Segurança Digital</h4>
+                <p>Seus dados protegidos com a mais alta segurança</p>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

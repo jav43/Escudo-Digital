@@ -1,15 +1,50 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 {% extends 'base.html' %}
 {% block content %}
-<h2>Agendar Consulta</h2>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    <div class="mb-3">
-        {{ form.date.label }} {{ form.date(class="form-control") }}
+<div class="container mt-4">
+    <h1>Agendar Consulta</h1>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('client_schedule') }}">
+                {{ form.csrf_token }}
+                
+                <div class="mb-3">
+                    <label for="doctor" class="form-label">Médico</label>
+                    {{ form.doctor(class="form-select", id="doctor", required=true) }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="date" class="form-label">Data</label>
+                    {{ form.date(class="form-control", id="date", type="date", required=true) }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="time" class="form-label">Horário</label>
+                    {{ form.time(class="form-select", id="time", required=true) }}
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('client_dashboard') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
+                    <button type="submit" class="btn btn-primary">Agendar</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="mb-3">
-        {{ form.time.label }} {{ form.time(class="form-control") }}
-    </div>
-    {{ form.submit(class="btn btn-primary") }}
-</form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        console.log('Enviando formulário...');
+        console.log('Médico:', document.getElementById('doctor').value);
+        console.log('Data:', document.getElementById('date').value);
+        console.log('Horário:', document.getElementById('time').value);
+        this.submit();
+    });
+});
+</script>
 {% endblock %}
